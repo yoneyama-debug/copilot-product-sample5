@@ -504,19 +504,28 @@ app.use((err, req, res, _next) => {
   return apiError(res, 500, "INTERNAL_ERROR", "Internal server error");
 });
 
-const server = app.listen(config.port, config.host, () => {
-  log("info", "Server started", {
-    requestId: crypto.randomUUID(),
-    host: config.host,
-    port: config.port,
-    nodeEnv: config.nodeEnv,
-    logLevel: config.logLevel,
-    bodyLimit: config.bodyLimit,
-    historyMax: config.historyMax,
-    rateLimitRps: config.rateLimitRps,
-    trustProxy: config.trustProxy,
+let server = null;
+function startServer() {
+  if (server) {
+    return server;
+  }
+
+  server = app.listen(config.port, config.host, () => {
+    log("info", "Server started", {
+      requestId: crypto.randomUUID(),
+      host: config.host,
+      port: config.port,
+      nodeEnv: config.nodeEnv,
+      logLevel: config.logLevel,
+      bodyLimit: config.bodyLimit,
+      historyMax: config.historyMax,
+      rateLimitRps: config.rateLimitRps,
+      trustProxy: config.trustProxy,
+    });
   });
-});
+
+  return server;
+}
 
 let shuttingDown = false;
 function gracefulShutdown(signal) {
@@ -540,6 +549,11 @@ function gracefulShutdown(signal) {
     process.exit(0);
   }, 10_000);
 
+  if (!server) {
+    process.exit(0);
+    return;
+  }
+
   server.close(() => {
     clearTimeout(forceExitTimer);
     log("info", "Server stopped gracefully", {
@@ -552,4 +566,33 @@ function gracefulShutdown(signal) {
 process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 
-module.exports = { app, server, log, validateConfig, decodeDemoData, apiError };
+function resetState() {
+  history.length = 0;
+  postRateCounters.clear();
+  for (const client of sseClients) {
+    clearInterval(client.timer);
+    try {
+      client.res.end();
+    } catch {}
+  }
+  sseClients.clear();
+}
+
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = {
+  app,
+  startServer,
+  get server() {
+    return server;
+  },
+  log,
+  validateConfig,
+  decodeDemoData,
+  apiError,
+  __testing: {
+    resetState,
+  },
+};
