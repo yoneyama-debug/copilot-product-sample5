@@ -200,9 +200,68 @@ function validateProductionPayload(payload) {
 }
 
 const history = [];
-const sseClients = { size: 0 };
-const broadcastSensorData = () => {};
+const sseClients = new Set();
 const postRateCounters = new Map();
+
+function removeSseClient(client) {
+  if (!client || !sseClients.has(client)) {
+    return;
+  }
+  clearInterval(client.timer);
+  sseClients.delete(client);
+}
+
+function addSseClient(req, res) {
+  if (sseClients.size >= config.sseMaxClients) {
+    return false;
+  }
+
+  res.status(200);
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders();
+  res.write("retry: 3000\n\n");
+
+  const client = {
+    id: crypto.randomUUID(),
+    res,
+    timer: null,
+  };
+
+  client.timer = setInterval(() => {
+    if (res.writableEnded || res.destroyed) {
+      removeSseClient(client);
+      return;
+    }
+
+    try {
+      res.write(": keep-alive\n\n");
+    } catch {
+      removeSseClient(client);
+    }
+  }, config.sseKeepaliveMs);
+
+  sseClients.add(client);
+  req.on("close", () => removeSseClient(client));
+
+  return true;
+}
+
+function broadcastSensorData(event) {
+  if (sseClients.size === 0) {
+    return;
+  }
+
+  const payload = JSON.stringify(event);
+  for (const client of sseClients) {
+    try {
+      client.res.write(`event: sensorData\ndata: ${payload}\n\n`);
+    } catch {
+      removeSseClient(client);
+    }
+  }
+}
 
 const csp = [
   "default-src 'self'",
@@ -361,6 +420,14 @@ app.get("/api/history", (req, res) => {
   res.json(history.slice(0, config.historyMax));
 });
 
+app.get("/events", (req, res) => {
+  const connected = addSseClient(req, res);
+  if (!connected) {
+    return apiError(res, 503, "SSE_CAPACITY", "Too many SSE clients");
+  }
+  return undefined;
+});
+
 app.get("/healthz", (req, res) => {
   res.json({
     status: "ok",
@@ -382,6 +449,11 @@ app.all("/api/history", (req, res) => {
 });
 
 app.all("/healthz", (req, res) => {
+  res.setHeader("Allow", "GET");
+  return apiError(res, 405, "METHOD_NOT_ALLOWED", "Method not allowed");
+});
+
+app.all("/events", (req, res) => {
   res.setHeader("Allow", "GET");
   return apiError(res, 405, "METHOD_NOT_ALLOWED", "Method not allowed");
 });
@@ -454,6 +526,12 @@ function gracefulShutdown(signal) {
     requestId: crypto.randomUUID(),
     signal,
   });
+
+  for (const client of sseClients) {
+    clearInterval(client.timer);
+    client.res.end();
+    sseClients.delete(client);
+  }
 
   const forceExitTimer = setTimeout(() => {
     log("warn", "Forced shutdown after timeout", {
