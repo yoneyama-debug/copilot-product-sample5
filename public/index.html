@@ -3,10 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TS-E1 Analyzer</title>
+    <title>TS-E1 Analyzer web</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
+    <header class="app-header">
+      <img id="logo" src="/drawable/app_icon.svg" alt="TS-E1" />
+      <h1>TS-E1 Analyzer web</h1>
+    </header>
+
+    <main class="main-grid">
+      <section class="left-column" aria-label="sensor cards">
+        <div id="card-temp" class="sensor-card selected-temp" role="button" tabindex="0" aria-pressed="true">
+          <div class="card-head">
+            <img src="/drawable/thermometer.svg" alt="Temperature" />
+            <span class="badge badge-temp">Temperature</span>
+          </div>
+          <div class="card-value-row">
+            <span class="value" id="temp-value">--</span>
+            <span class="unit">°C</span>
+          </div>
+          <canvas id="mini-chart-temp" width="320" height="96" aria-label="Temperature mini chart"></canvas>
+        </div>
+
+        <div id="card-hum" class="sensor-card" role="button" tabindex="0" aria-pressed="false">
+          <div class="card-head">
+            <img src="/drawable/humidity.svg" alt="Humidity" />
+            <span class="badge badge-hum">Humidity</span>
+          </div>
+          <div class="card-value-row">
+            <span class="value" id="hum-value">--</span>
+            <span class="unit">%</span>
+          </div>
+          <canvas id="gauge-hum" width="320" height="120" aria-label="Humidity gauge"></canvas>
+        </div>
+      </section>
+
+      <section class="right-column" aria-label="charts">
+        <div id="chart-error" class="chart-error" hidden>Chart の読み込みに失敗しました。カードとテーブル更新は継続します。</div>
+        <canvas id="chart-temp" class="main-chart" aria-label="Temperature chart"></canvas>
+        <canvas id="chart-hum" class="main-chart" style="display: none" aria-label="Humidity chart"></canvas>
+      </section>
+    </main>
+
+    <section class="data-table" aria-label="received data table">
+      <h2>Received data</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Time Stamp</th>
+              <th scope="col">Data</th>
+              <th scope="col">Data Size</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
     <script src="/vendor/chart.umd.min.js"></script>
     <script src="/app.js"></script>
   </body>
