@@ -1,0 +1,1 @@
+/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/arm64-v8a

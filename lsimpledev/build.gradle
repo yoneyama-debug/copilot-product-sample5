@@ -1,0 +1,130 @@
+plugins {
+    alias libs.plugins.android.application
+    alias libs.plugins.jetbrains.kotlin.android
+    alias libs.plugins.jetbrains.kotlin.kapt
+    alias libs.plugins.oss.licenses
+}
+
+android {
+    namespace = 'jp.co.sstinc.lsimpledev'
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId "jp.co.sstinc.lsimpledev"
+        minSdkVersion 26
+        targetSdkVersion 36
+        versionCode 19
+        versionName "2.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++14 -frtti"
+                // 複数の.soを使う場合はstaticリンクにすると、名前の重複が原因で
+                // よくないことがあるらしいのでsharedでいく
+                arguments "-DANDROID_STL=c++_shared"
+                arguments "-DANDROID_ARM_MODE=arm"
+                arguments "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+                arguments "-DBASE_PATH=${projectDir.toPath().parent.toString()}"
+
+                arguments "-DSSTAUDIO_PROJ=${rootProject.file(sstAudioProjPath).toPath()}"
+                arguments "-DSSTAUDIO_LIBS=${rootProject.file(sstAudioLibPath).toPath()}"
+            }
+        }
+    }
+
+    flavorDimensions = ["accessType"]
+    productFlavors {
+        "demo" {
+            dimension "accessType"
+        }
+        "internal" {
+            dimension "accessType"
+            applicationIdSuffix ".internal"
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig debug.signingConfig
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+        buildConfig true
+    }
+
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+    }
+}
+
+dependencies {
+    implementation project(path: ":lsimpleraw")
+    implementation libs.wavformview
+    implementation libs.sstaudio
+
+    implementation libs.androidx.fragment.ktx
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
+    implementation libs.androidx.recyclerview
+    implementation libs.okhttp
+    implementation libs.play.services.oss.licenses
+
+    testImplementation libs.okhttp.mockwebserver
+    testImplementation libs.junit
+    testImplementation libs.robolectric
+}
+
+android {
+    // ファイル名をカスタマイズ
+    applicationVariants.configureEach { variant ->
+
+        variant.outputs.each { output ->
+            def oldName = output.outputFileName
+            if (oldName != null) {
+                def extension = oldName.substring(oldName.lastIndexOf('.'))
+
+                if (extension == '.apk') {
+                    def suffix = "${variant.versionName}-${variant.versionCode}-${variant.buildType.name}"
+
+                    def base_name = variant.flavorName == "demo" ? "TS-E1_Demo" : "TS-E1_Dev社内用"
+
+                    output.outputFileName = "${base_name}-${suffix}${extension}"
+                }
+            }
+        }
+    }
+    // 上の処理ではaabファイル名のカスタマイズまではできないので、簡易的に以下の処理でaabmファイル名をカスタマイズ
+    // この方法ではフレイバーごとにはカスタマイズできない
+    defaultConfig {
+        base.archivesName = "TS-E1_Dev" + "-" + versionName + "-" + versionCode
+    }
+}

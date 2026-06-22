@@ -1,0 +1,1 @@
+/Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/CMakeLists.txt

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/SecondFragment">
+
+<!--    <fragment-->
+<!--        android:id="@+id/FirstFragment"-->
+<!--        android:name="jp.co.sstinc.lsimpledev.MenuFragment"-->
+<!--        android:label="@string/first_fragment_label"-->
+<!--        tools:layout="@layout/fragment_menu">-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_Menu_to_LSimple"-->
+<!--            app:destination="@id/SecondFragment" />-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_Menu_to_FileOutput_Settings"-->
+<!--            app:destination="@id/FileOutputSettingsFragment" />-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_Menu_to_Server_Settings"-->
+<!--            app:destination="@id/ServerSettingsFragment" />-->
+<!--    </fragment>-->
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="jp.co.sstinc.lsimpledev.LSimpleFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_lsimple">
+    </fragment>
+
+    <fragment
+        android:id="@+id/FileOutputSettingsFragment"
+        android:name="jp.co.sstinc.lsimpledev.FileOutputSettingsFragment"
+        android:label="@string/file_output_settings_fragment_label"
+        tools:layout="@layout/fragment_file_output_settings" />
+
+    <fragment
+        android:id="@+id/ServerSettingsFragment"
+        android:name="jp.co.sstinc.lsimpledev.ServerSettingsFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_server_settings" />
+</navigation>

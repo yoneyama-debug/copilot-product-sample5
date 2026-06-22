@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--  demoFlavor用の情報表示欄  -->
+
+    <data>
+        <import type="android.view.View" />
+        <import type="android.graphics.Typeface" />
+        <variable name="viewModel" type="jp.co.sstinc.lsimpledev.LSimpleViewModel" />
+        <variable name="clear" type="android.view.View.OnClickListener" />
+        <variable name="play" type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lsimpleInformationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/latestDataScrollContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="false"
+            android:overScrollMode="ifContentScrolls"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomContentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
+
+            <LinearLayout
+                android:id="@+id/latestDataContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/noDataText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{viewModel.running == true ? @string/analyzing : @string/no_data_detected}'
+                    android:textSize="16sp"
+                    android:textColor="@color/md_theme_outline"
+                    android:visibility='@{viewModel.isDetailVisible &amp;&amp; !viewModel.isRawDetectDataVisible ? View.VISIBLE : View.GONE}'
+                    tools:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.isRawDetectDataVisible ? View.VISIBLE : View.GONE}">
+
+                    <TextView
+                        android:id="@+id/timestampText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.detectTimestampString}"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:cardBackgroundColor="@color/backgroundGray"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/byteSizeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="6dp"
+                            android:paddingVertical="1dp"
+                            android:text="@{viewModel.detectByteSizeString}"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp" />
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/processedReceiveData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="@{viewModel.processedDetectDataString}"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:visibility="@{viewModel.isProcessedDetectDataVisible ? View.VISIBLE : View.GONE}" />
+
+                <TextView
+                    android:id="@+id/rawReceiveData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="sans-serif"
+                    android:text="@{viewModel.rawDetectDataString}"
+                    android:textSize="@{viewModel.isProcessedDetectDataVisible ? @dimen/raw_data_text_small : @dimen/raw_data_text_large}"
+                    app:textStyleInt="@{viewModel.isProcessedDetectDataVisible ? Typeface.NORMAL : Typeface.BOLD}"
+                    android:visibility="@{viewModel.isRawDetectDataVisible ? View.VISIBLE : View.GONE}" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <View
+            android:id="@+id/latestDataDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/gray"
+            android:visibility="@{viewModel.isDetailVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/bottomContentContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/latestDataScrollContainer" />
+
+        <FrameLayout
+            android:id="@+id/bottomContentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/lsimple_information_bottom_min_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/latestDataDivider">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/receiveHistoryList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:minHeight="@dimen/lsimple_information_bottom_min_height"
+                android:layout_marginTop="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:visibility='@{!viewModel.isDetailVisible &amp;&amp; viewModel.isHistoryEmpty != true ? View.VISIBLE : View.GONE}'
+                tools:listitem="@layout/item_receive_history"
+                tools:visibility="visible" />
+
+            <ScrollView
+                android:id="@+id/informationScrollArea"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:minHeight="@dimen/lsimple_information_bottom_min_height"
+                android:visibility="@{viewModel.isDetailVisible ? View.VISIBLE : View.GONE}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/detailDataTitle"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/recTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/recTimeTitle+viewModel.recTimString}" />
+
+                    <TextView
+                        android:id="@+id/trims"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/trims+viewModel.trimsString}" />
+
+                    <TextView
+                        android:id="@+id/receiveDataFreq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/detectDataFreqTitle+viewModel.detectDataFreqString}" />
+
+                    <TextView
+                        android:id="@+id/receiveType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/currentFreqTitle+viewModel.currentFreqString}" />
+
+                    <TextView
+                        android:id="@+id/bufferUsed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/bufferUsedTitle+viewModel.bufferUsedString}" />
+
+                    <TextView
+                        android:id="@+id/errorRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/errorRateTitle+viewModel.hardErrorRateString}" />
+
+                    <TextView
+                        android:id="@+id/validDataRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dp"
+                        android:text="@{@string/validDataTitle+viewModel.validDataRateString}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/playButton"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:onClick="@{play::onClick}"
+                        android:text="@string/play"
+                        android:textSize="12sp"
+                        app:icon="@drawable/ic_play_arrow"
+                        app:iconGravity="textStart" />
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

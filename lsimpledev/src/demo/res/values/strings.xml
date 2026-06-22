@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TS-E1 Analyzer</string>
+    <string name="first_fragment_label">TS-E1 Analyzer Menu</string>
+    <string name="second_fragment_label">TS-E1 Analyzer</string>
+
+    <string name="processedDetectDataTitle">データの内容:</string>
+    <string name="detailDataTitle">デバッグ情報</string>
+</resources>

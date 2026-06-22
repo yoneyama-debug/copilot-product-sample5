@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="lsimple_information_bottom_min_height">120dp</dimen>
+    <dimen name="raw_data_text_small">16sp</dimen>
+    <dimen name="raw_data_text_large">24sp</dimen>
+</resources>

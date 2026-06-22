@@ -1,0 +1,27 @@
+# ninja log v5
+0	1921	1775190257714387985	CMakeFiles/tssciv2dev.dir/FileRecorder.cpp.o	b6c2148a83bf3bc4
+0	1925	1775190257715447808	CMakeFiles/tssciv2dev.dir/RawFloatRecorder.cpp.o	8da29c95d0129547
+1925	2321	1775190258122787903	/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/arm64-v8a/libtssciv2dev.so	6b0f9853c2795064
+0	11	0	clean	f200ca62e439c967
+0	27	0	clean	f200ca62e439c967
+7	1805	1776660936532211855	CMakeFiles/tssciv2dev.dir/RawFloatRecorder.cpp.o	8da29c95d0129547
+6	1849	1776660936573715468	CMakeFiles/tssciv2dev.dir/FileRecorder.cpp.o	b6c2148a83bf3bc4
+1849	2004	1776660936735055090	/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/arm64-v8a/libtssciv2dev.so	6b0f9853c2795064
+0	8	0	clean	f200ca62e439c967
+0	13	0	clean	f200ca62e439c967
+2	607	1779328755851650919	CMakeFiles/tssciv2dev.dir/RawFloatRecorder.cpp.o	8da29c95d0129547
+2	632	1779328755877460665	CMakeFiles/tssciv2dev.dir/FileRecorder.cpp.o	b6c2148a83bf3bc4
+632	734	1779328755983390706	/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/arm64-v8a/libtssciv2dev.so	6b0f9853c2795064
+0	10	0	clean	f200ca62e439c967
+0	12	0	clean	f200ca62e439c967
+0	7	0	clean	f200ca62e439c967
+0	15	0	clean	f200ca62e439c967
+0	12	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+0	8	0	clean	f200ca62e439c967
+0	8	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+5	1474	1779432932964134881	CMakeFiles/tssciv2dev.dir/FileRecorder.cpp.o	b6c2148a83bf3bc4
+6	1482	1779432932971659413	CMakeFiles/tssciv2dev.dir/RawFloatRecorder.cpp.o	8da29c95d0129547
+1483	1573	1779432933070252316	/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/arm64-v8a/libtssciv2dev.so	6b0f9853c2795064

@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/Users/yoneyama/SDK/lsimple-android/lsimpledev/.cxx/Debug/6y1c646w/x86",
+  "command": "/Users/yoneyama/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android26 --sysroot=/Users/yoneyama/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dtssciv2dev_EXPORTS -I/Users/yoneyama/SDK/lsimple-android/sstaudio/audioLib/../concurrentqueue -I/Users/yoneyama/SDK/lsimple-android/sstaudio/audioLib/src/main/cpp -I/Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/../../../../TSSCIV2/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++14 -frtti -std=c++14 -fno-limit-debug-info  -fPIC -o CMakeFiles/tssciv2dev.dir/FileRecorder.cpp.o -c /Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/FileRecorder.cpp",
+  "file": "/Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/FileRecorder.cpp"
+},
+{
+  "directory": "/Users/yoneyama/SDK/lsimple-android/lsimpledev/.cxx/Debug/6y1c646w/x86",
+  "command": "/Users/yoneyama/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=i686-none-linux-android26 --sysroot=/Users/yoneyama/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dtssciv2dev_EXPORTS -I/Users/yoneyama/SDK/lsimple-android/sstaudio/audioLib/../concurrentqueue -I/Users/yoneyama/SDK/lsimple-android/sstaudio/audioLib/src/main/cpp -I/Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/../../../../TSSCIV2/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++14 -frtti -std=c++14 -fno-limit-debug-info  -fPIC -o CMakeFiles/tssciv2dev.dir/RawFloatRecorder.cpp.o -c /Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/RawFloatRecorder.cpp",
+  "file": "/Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/RawFloatRecorder.cpp"
+}
+]

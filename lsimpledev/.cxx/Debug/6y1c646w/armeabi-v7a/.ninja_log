@@ -1,0 +1,16 @@
+# ninja log v5
+0	1676	1776762419475207455	CMakeFiles/tssciv2dev.dir/FileRecorder.cpp.o	355a261190bab36f
+1	1719	1776762419518265262	CMakeFiles/tssciv2dev.dir/RawFloatRecorder.cpp.o	5cd6aa82d5d27d7d
+1719	1909	1776762419715909118	/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/armeabi-v7a/libtssciv2dev.so	e9434cba7594daea
+0	9	0	clean	f200ca62e439c967
+0	11	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+0	8	0	clean	f200ca62e439c967
+0	8	0	clean	f200ca62e439c967
+0	13	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+0	9	0	clean	f200ca62e439c967
+0	7	0	clean	f200ca62e439c967
+0	13	0	clean	f200ca62e439c967
+0	24	0	clean	f200ca62e439c967

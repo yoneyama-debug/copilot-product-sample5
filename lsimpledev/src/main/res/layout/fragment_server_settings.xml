@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ServerSettingsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/postSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/post_enabled" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/post_explanation"
+            android:textSize="12sp"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/postUrlLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/post_url"
+            app:placeholderText="http://example.com"
+            app:placeholderTextColor="@color/md_theme_outlineVariant"
+            app:expandedHintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/postUrlEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textUri"
+                tools:text="http://10.0.2.2:8000/events" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/testButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/test_post" />
+
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/settings_result_idle"
+            app:lineHeight="24sp"
+            tools:text="通信結果" />
+
+    </LinearLayout>
+</ScrollView>

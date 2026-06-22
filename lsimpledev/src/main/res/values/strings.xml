@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">TS-E1 Dev社内用</string>
+    <string name="action_settings">アプリの設定を開く</string>
+    <string name="action_server_settings">データ送信設定</string>
+    <string name="action_file_output_settings">ファイル出力設定</string>
+    <string name="action_oss_licenses">ライセンス</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">TS-E1 Dev社内用 Menu</string>
+    <string name="second_fragment_label">TS-E1 Dev社内用</string>
+    <string name="file_output_settings_fragment_label">ファイル出力設定</string>
+    <string name="settings_fragment_label">データ送信設定</string>
+    <string name="to_lsimple">TS-E1音を解析</string>
+
+    <string name="recTimeTitle">録音時間:</string>
+    <string name="rawDetectDataTitle">受信データ:</string>
+    <string name="detectFidTitle">fid:</string>
+    <string name="detectSidTitle">sid:</string>
+    <string name="trims">受信データのtrims:</string>
+    <string name="detectDataFreqTitle">受信データのfAdjust:</string>
+    <string name="currentFreqTitle">解析中のfAdjust:</string>
+    <string name="bufferUsedTitle">バッファ使用量:</string>
+    <string name="errorRateTitle">HardErrorRate:</string>
+    <string name="validDataTitle">ValidDataRate:</string>
+    <string name="saveFileTitle">保存ファイル:</string>
+    <string name="clear">clear</string>
+    <string name="start">解析を開始</string>
+<!--    <string name="stop"></string>-->
+    <string name="save">保存</string>
+    <string name="play">テスト音を再生</string>
+    <string name="save_switch">録音ファイル・ログファイルを保存</string>
+<!--    <string name="csv_save_switch">CSVファイル保存</string>-->
+    <string name="csv_save_enabled">CSVファイルを保存</string>
+    <string name="post_enabled">データ送信</string>
+    <string name="post_explanation">設定を有効にすると指定したURLに受信データが送信されます。</string>
+    <string name="post_url">送信先URL</string>
+    <string name="save_url">設定を保存</string>
+    <string name="save_file_output_settings">ファイル出力設定を保存</string>
+    <string name="download_directory_button_label">ダウンロードフォルダを開く</string>
+    <string name="test_post">データ送信テストを実行</string>
+    <string name="settings_result_idle"> </string>
+    <string name="invalid_url">URL形式が不正です</string>
+    <string name="save_done">保存しました</string>
+    <string name="testing">送信中...</string>
+    <string name="test_post_success">データ送信テスト 成功</string>
+    <string name="test_post_failed">データ送信テスト 失敗: %1$s</string>
+    <string name="post_error_text">POST送信エラー</string>
+    <string name="recover_csv_message">前回の未保存CSVデータを%1$d件復旧しました</string>
+    <string name="no_data_detected">受信データなし</string>
+    <string name="analyzing">解析中...</string>
+    <string name="detailDataTitle">デバッグ情報</string>
+</resources>

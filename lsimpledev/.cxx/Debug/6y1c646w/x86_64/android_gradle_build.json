@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "/Users/yoneyama/SDK/lsimple-android/lsimpledev/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/yoneyama/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/yoneyama/SDK/lsimple-android/lsimpledev/.cxx/Debug/6y1c646w/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/yoneyama/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/yoneyama/SDK/lsimple-android/lsimpledev/.cxx/Debug/6y1c646w/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "tssciv2dev::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "tssciv2dev",
+      "output": "/Users/yoneyama/SDK/lsimple-android/lsimpledev/build/intermediates/cxx/Debug/6y1c646w/obj/x86_64/libtssciv2dev.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/yoneyama/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/yoneyama/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
