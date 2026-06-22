@@ -75,10 +75,11 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   const start = process.hrtime.bigint();
+  const requestPath = req.originalUrl || req.url;
   log("info", "Request received", {
     requestId: req.requestId,
     method: req.method,
-    path: req.path,
+    path: requestPath,
     ip: req.ip,
   });
   res.on("finish", () => {
@@ -86,7 +87,7 @@ app.use((req, res, next) => {
     log("info", "Request completed", {
       requestId: req.requestId,
       method: req.method,
-      path: req.path,
+      path: requestPath,
       status: res.statusCode,
       durationMs: Number(durationMs.toFixed(3)),
       ip: req.ip,
